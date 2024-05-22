@@ -7,6 +7,7 @@ word = comtypes.client.CreateObject("Word.Application")
 
 for filename in os.listdir(path):
     if filename.endswith(".doc") or filename.endswith(".docx"):
+        print(f"Converting {filename} to PDF...")
         doc_path = os.path.join(path, filename)
         pdf_path = os.path.join(path, filename.replace(".docx", ".pdf").replace(".doc", ".pdf"))
         doc = word.Documents.Open(doc_path)
