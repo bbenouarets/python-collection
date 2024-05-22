@@ -7,14 +7,14 @@ word = comtypes.client.CreateObject("Word.Application")
 
 for filename in os.listdir(path):
     if filename.endswith(".doc") or filename.endswith(".docx"):
+        doc_abspath = os.path.abspath(path)
         doc_path = os.path.join(path, filename)
         print(f"Converting {doc_path} to PDF...")
-        pdf_path = os.path.join(path, filename.replace(".docx", ".pdf").replace(".doc", ".pdf"))
-        print(f"PDF path: {pdf_path}")
-        doc = word.Documents.Open(doc_path)
+        pdf_path = os.path.join(doc_abspath, filename.replace(".docx", ".pdf"))
+        doc = word.Documents.Open(doc_abspath)
         doc.SaveAs(pdf_path, FileFormat=17)
-        print(f"Converted {filename} to PDF.")
         doc.Close()
+        print(f"Converted {doc_path} to PDF.")
 
 word.Quit()
 
