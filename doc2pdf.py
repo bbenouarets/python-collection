@@ -1,16 +1,18 @@
+import sys
 import os
-from docx2pdf import convert
+import comtypes.client
 
 path = "docs"
+
+word = comtypes.client.CreateObject("Word.Application")
 
 for filename in os.listdir(path):
     if filename.endswith(".doc") or filename.endswith(".docx"):
         doc_path = os.path.join(path, filename)
-        # Remove spaces from the filename
-        new_doc_path = doc_path.replace(" ", "_")
-        # Create empty file with the new name
-        open(new_doc_path, "w").close()
-        # Rename the file
-        convert(doc_path, new_doc_path)
-
-print("All .doc and .docx files in the 'docs' folder have been converted to PDF.")
+        print(f"Path: {doc_path}")
+        print(f"Converting {doc_path} to PDF...")
+        pdf_path = os.path.join(path, filename.replace(".doc", ".pdf").replace(".docx", ".pdf").replace(" ", "_"))
+        doc = word.Documents.Open(doc_path)
+        doc.SaveAs(pdf_path, FileFormat=17)
+        doc.Close()
+        print(f"Converted {doc_path} to PDF.")
