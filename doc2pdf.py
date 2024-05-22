@@ -29,4 +29,6 @@ def convert_all_docs_to_pdf(folder_path):
             convert_doc_to_pdf(file_path, pdf_path)  # Wandelt die .doc-Datei in PDF um
             print(f"Converted {filename} to PDF.")  # Gibt eine Erfolgsmeldung aus
 
-# Fordert d
+# Fordert den Benutzer auf, den Pfad zum Ordner mit den .doc- und .docx-Dateien einzugeben
+folder_path = input("Please enter the path to the folder containing .doc and .docx files: ")
+convert_all_docs_to_pdf(folder_path)  # Ruft die Funktion zur Umwandlung aller Dateien auf
